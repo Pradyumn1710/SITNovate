@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors=require('cors');
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -9,10 +9,14 @@ const app = express();
 const passportConfig = require('./passport_config'); 
 const authRoutes = require('./routes/auth');
 const documentRoutes=require('./routes/documents');
-const chatRoutes=require('./routes/chatRoutes');
+const chatRoutes=require('./routes/chat');
 
 
 app.use(express.json());
+
+
+app.use(cors());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your_session_secret',
